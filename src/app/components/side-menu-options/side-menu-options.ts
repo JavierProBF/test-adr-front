@@ -4,6 +4,7 @@ import { SideMenu } from '../side-menu/side-menu';
 
 interface MenuItem {
     label: string;
+    sublabel?: string;
     route: string;
     icon: string;
 }   
@@ -16,8 +17,8 @@ interface MenuItem {
 })
 export class SideMenuOptions {
 SideMenuItems: MenuItem[] = [
-    { label: 'Home', route: '/home', icon: 'home' },
-    { label: 'Consult', route: '/consult', icon: 'search' },
-    { label: 'Register', route: '/register', icon: 'edit' }
+    { label: 'Home', route: '/home', icon: 'fa-solid fa-house-chimney-user fa-lg' },
+    { label: 'Consult', route: '/home/consult', icon: 'fa-solid fa-magnifying-glass' },
+    { label: 'Register', route: '/home/register', icon: 'fa-solid fa-file-pen' }
   ];
 }
