@@ -1,21 +1,30 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+    // Redirige la ruta raíz a /home
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+    },
+    // Página principal
     {
         path: 'home',
-        loadComponent: () => import('./pages/home-page/home-page').then(m => m.HomePage),
-        children: [
-            {
-                path: 'consult',
-                loadComponent: () => import('./pages/adr-consult-page/adr-consult-page').then(m => m.AdrConsultPage)
-            },
-            {
-                path: 'register',
-                loadComponent: () => import('./pages/adr-register-page/adr-register-page').then(m => m.AdrRegisterPage)
-            },]
+        loadComponent: () => import('./pages/home-page/home-page').then(m => m.HomePage)
     },
+    // Página de consulta
+    {
+        path: 'consult',
+        loadComponent: () => import('./pages/adr-consult-page/adr-consult-page').then(m => m.AdrConsultPage)
+    },
+    // Página de registro
+    {
+        path: 'register',
+        loadComponent: () => import('./pages/adr-register-page/adr-register-page').then(m => m.AdrRegisterPage)
+    },
+    // Ruta comodín para páginas no encontradas
     { 
         path: '**',
-        redirectTo: '/home'
-    },
+        redirectTo: 'home'
+    }
 ];
