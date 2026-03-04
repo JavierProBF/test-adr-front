@@ -1,12 +1,12 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdrConsultPage } from './adr-consult-page';
+import { CardAdr } from './card-adr';
 import { AdrRecordsService } from '../../services/adr-records.service';
 
-describe('AdrConsultPage', () => {
-  let component: AdrConsultPage;
-  let fixture: ComponentFixture<AdrConsultPage>;
+describe('CardAdr', () => {
+  let component: CardAdr;
+  let fixture: ComponentFixture<CardAdr>;
 
   beforeEach(async () => {
     const adrRecordsServiceMock = {
@@ -15,14 +15,14 @@ describe('AdrConsultPage', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [AdrConsultPage],
+      imports: [CardAdr],
       providers: [
         { provide: AdrRecordsService, useValue: adrRecordsServiceMock }
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdrConsultPage);
+    fixture = TestBed.createComponent(CardAdr);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

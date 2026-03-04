@@ -1,2 +1,84 @@
-<p>adr-consult-page works!</p>
+  <div class="p-6 bg-slate-50 min-h-screen font-sans">
+      <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- SECCIÓN DE TARJETAS DE MÉTRICAS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Tarjeta: Total de Registros -->
+          <app-card-adr/>
 
+          <!-- Tarjeta: Simulación de Crecimiento -->
+          <div class="md:col-span-2 bg-gradient-to-r from-blue-600 to-indigo-700 p-6 rounded-[2rem] text-white flex justify-between items-center shadow-lg shadow-blue-500/20">
+            <div>
+              <h4 class="font-bold text-lg tracking-tight">Análisis de Decisiones</h4>
+              <p class="text-blue-100 text-sm">Los vectores SVG se recalculan en cada actualización.</p>
+            </div>
+            <button (click)="randomizeData()" class="bg-white text-blue-600 px-6 py-3 rounded-xl font-bold hover:bg-blue-50 transition-all shadow-sm active:scale-95">
+              🔄 Actualizar Datos
+            </button>
+          </div>
+        </div>
+
+        <!-- SECCIÓN DE LA GRÁFICA DE LÍNEAS (SVG) -->
+        <div class="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 shadow-sm overflow-hidden">
+          <div class="flex justify-between items-start mb-12">
+            <div>
+              <h3 class="text-2xl font-black text-slate-800 tracking-tight text-center sm:text-left">Flujo de Actividad Mensual</h3>
+              <p class="text-slate-400 text-sm italic">Visualización dinámica mediante paths vectoriales</p>
+            </div>
+            <div class="hidden sm:flex flex-col items-end">
+              <span class="text-2xl font-black text-blue-600">+14.2%</span>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tendencia Global</span>
+            </div>
+          </div>
+
+          <!-- Contenedor del Gráfico SVG -->
+          <div class="relative w-full h-64 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200 p-4">
+            <svg viewBox="0 0 1000 200" preserveAspectRatio="none" class="w-full h-full overflow-visible">
+              <defs>
+                <!-- Gradiente para el área debajo de la línea -->
+                <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563eb" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- Área Sombreada -->
+              <path [attr.d]="areaPath()" fill="url(#areaGradient)" class="transition-all duration-700 ease-in-out" />
+
+              <!-- Línea de Tendencia -->
+              <path 
+                [attr.d]="linePath()" 
+                fill="none" 
+                stroke="#2563eb" 
+                stroke-width="4" 
+                stroke-linecap="round" 
+                stroke-linejoin="round"
+                class="transition-all duration-1000 ease-in-out" />
+
+              <!-- Puntos de Datos -->
+              @for (data of monthlyStats(); track data.month; let i = $index) {
+                <circle 
+                  [attr.cx]="(i / (monthlyStats().length - 1)) * 1000" 
+                  [attr.cy]="200 - (data.value / 100 * 160 + 20)" 
+                  r="6" 
+                  fill="white" 
+                  stroke="#2563eb" 
+                  stroke-width="3"
+                  class="transition-all duration-500"
+                />
+              }
+            </svg>
+            
+            <!-- Etiquetas de los meses -->
+            <div class="flex justify-between mt-6 px-1">
+              @for (data of monthlyStats(); track data.month) {
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                  {{ data.month }}
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
