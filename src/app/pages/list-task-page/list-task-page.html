@@ -203,7 +203,7 @@
                                     <span class="text-[10px] font-black text-[#bc002d]">62%</span>
                                 </div>
                             </td>
-                            <td class="px-10 py-8 text-right"><button class="px-6 py-2.5 bg-[#bc002d] text-white text-[9px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-md">Intervenir</button></td>
+                            <td class="px-10 py-8 text-right"><button (click)="intervencionModal.abrir()" class="px-6 py-2.5 bg-[#bc002d] text-white text-[9px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all shadow-md">Intervenir</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -219,7 +219,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
+                <app-intervencion-modal #intervencionModal></app-intervencion-modal>
                 <!-- ESTADO 1: PLANIFICACIÓN -->
                 <div class="space-y-6">
                     <div class="border-b-2 border-slate-900 pb-4 flex justify-between items-center px-2">

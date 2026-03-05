@@ -1,0 +1,55 @@
+<!-- Solo mostramos el modal si el "Interruptor" isOpen es verdadero -->
+@if (isOpen()) {
+  <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    
+    <!-- Contenedor Blanco del Modal -->
+    <div class="bg-white w-full max-w-2xl shadow-2xl animate-in zoom-in-95 duration-200">
+      
+      <!-- CABECERA (Oscura como en la imagen) -->
+      <div class="bg-[#0f172a] p-5 flex justify-between items-center border-b-2 border-red-600">
+        <div class="flex items-center gap-2">
+           <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+           <h2 class="text-white font-black italic uppercase tracking-tighter">
+             Protocolo de Intervención de Honor
+           </h2>
+        </div>
+        <button (click)="cerrar()" class="text-white hover:text-red-500 transition-colors">✕</button>
+      </div>
+
+      <!-- CUERPO DEL FORMULARIO -->
+      <form [formGroup]="protocolForm" (ngSubmit)="ejecutar()" class="p-8 space-y-6">
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Nivel de Severidad</label>
+            <select formControlName="nivel" class="w-full bg-slate-50 p-3 font-bold italic border-none outline-none focus:ring-1 focus:ring-red-500">
+              <option value="Baja">Baja</option>
+              <option value="Media">Media</option>
+              <option value="Alta">Alta</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-slate-400 uppercase">Motivo</label>
+            <input formControlName="motivo" placeholder="Ej: Sobrecarga" class="w-full bg-slate-50 p-3 font-bold italic outline-none focus:ring-1 focus:ring-red-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[10px] font-bold text-slate-400 uppercase">Instrucciones Mandatorias</label>
+          <textarea formControlName="instrucciones" rows="3" class="w-full bg-slate-50 p-3 italic outline-none focus:ring-1 focus:ring-red-500"></textarea>
+        </div>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="grid grid-cols-2 gap-4 pt-4">
+          <button type="button" (click)="cerrar()" class="p-4 border font-bold uppercase text-slate-400 hover:bg-slate-50 transition-all">
+            Abortar Protocolo
+          </button>
+          <button type="submit" [disabled]="!protocolForm.valid" class="p-4 bg-[#c4002b] text-white font-bold uppercase shadow-lg hover:bg-red-700 transition-all disabled:opacity-30">
+            Ejecutar Intervención
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+}

@@ -10,6 +10,13 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Logs
+logs
+*.log
 
 # IDEs and editors
 .idea/
@@ -36,6 +43,19 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+
+# Build and temp
+/.cache
+/.temp
+/.tmp
+/.vite
+/build
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.template
 
 # System files
 .DS_Store
