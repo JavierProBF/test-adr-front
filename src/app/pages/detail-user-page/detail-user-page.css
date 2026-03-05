@@ -1,0 +1,22 @@
+ body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fcfcfc;
+            background-image: radial-gradient(#bc002d08 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        .japan-border { border-left: 4px solid #bc002d; }
+        .japan-dot { width: 10px; height: 10px; background-color: #bc002d; border-radius: 50%; box-shadow: 0 0 12px rgba(188, 0, 45, 0.4); }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bc002d; border-radius: 10px; }
+
+        .profile-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .project-row:hover { background-color: rgba(188, 0, 45, 0.02); transform: translateX(4px); }
+        
+        /* Animación para barras de progreso */
+        @keyframes progressLoad {
+            from { width: 0; }
+            to { width: var(--progress); }
+        }
+        .animate-progress { animation: progressLoad 1.5s ease-out forwards; }

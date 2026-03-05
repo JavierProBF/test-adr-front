@@ -22,6 +22,18 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./pages/adr-register-page/adr-register-page').then(m => m.AdrRegisterPage)
     },
+    {
+        path: 'adrdetails',
+        loadComponent: () => import('./pages/adr-detail/adr-detail').then(m => m.AdrDetail)
+    },
+    {
+        path: 'listTasks',
+        loadComponent: () => import('./pages/list-task-page/list-task-page').then(m => m.ListTaskPage)
+    },
+    {
+        path: 'detailUser',
+        loadComponent: () => import('./pages/detail-user-page/detail-user-page').then(m => m.DetailUserPage)
+    },
     // Ruta comodín para páginas no encontradas
     { 
         path: '**',

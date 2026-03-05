@@ -1,9 +1,8 @@
-import { Injectable, signal} from '@angular/core';
-
-export interface MonthlyStat {
-  month: string;
-  value: number;
-}
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, of } from 'rxjs';
+import { ADR_METRICS_MOCK_RESPONSE } from '../mocks/adr-metrics.mock';
+import { AdrMetricsApiResponse, MonthlyStat } from '../models/adr-metrics.model';
 
 
 @Injectable({
@@ -13,56 +12,95 @@ export interface MonthlyStat {
 
 
 export class AdrMetricsService {
-  // --- Datos Mock (Simulados) ---
-  private readonly INITIAL_RECORDS = 1250;
-  private readonly INITIAL_STATS: MonthlyStat[] = [
-    { month: 'Ene', value: 30 },
-    { month: 'Feb', value: 55 },
-    { month: 'Mar', value: 42 },
-    { month: 'Abr', value: 85 },
-    { month: 'May', value: 60 },
-    { month: 'Jun', value: 95 },
-    { month: 'Jul', value: 75 }
-  ];
+  private readonly http = inject(HttpClient);
+  private readonly endpoint = '/api/metrics';
+
+  private readonly INITIAL_RECORDS = ADR_METRICS_MOCK_RESPONSE.totalRecords;
+  private readonly INITIAL_STATS: MonthlyStat[] = ADR_METRICS_MOCK_RESPONSE.monthlyStats;
 
   /**
-   * totalRecords: Signal que mantiene el contador total de registros.
-   * Se inicializa con el valor mock.
+   * Signals para el estado de las métricas.
    */
   totalRecords = signal<number>(this.INITIAL_RECORDS);
+  monthlyStats = signal<MonthlyStat[]>([]);
 
   /**
-   * monthlyStats: Signal que contiene el array de estadísticas para la gráfica.
-   * El uso de señales aquí permite que cualquier componente suscrito se actualice
-   * automáticamente cuando el array cambie.
+   * getMetricsFromServer
+   * Obtiene métricas vía GET y usa mock como fallback.
    */
-  monthlyStats = signal<MonthlyStat[]>(this.INITIAL_STATS);
+  getMetricsFromServer(): void {
+    this.http
+      .get<unknown>(this.endpoint)
+      .pipe(
+        map((response) => this.normalizeMetricsResponse(response)),
+        catchError(() => of(ADR_METRICS_MOCK_RESPONSE))
+      )
+      .subscribe((metrics) => {
+        this.totalRecords.set(metrics.totalRecords);
+        this.monthlyStats.set(metrics.monthlyStats);
+      });
+  }
 
   /**
    * refreshMetrics
-   * Simula la actualización de datos (como si vinieran de un WebSocket o API).
-   * Utiliza el método .update() de los signals para modificar el estado basado en el valor anterior.
+   * Simula la actualización de datos existentes.
    */
   refreshMetrics(): void {
-    // 1. Actualizamos el contador total con un incremento aleatorio (0-14)
     this.totalRecords.update(currentValue => currentValue + Math.floor(Math.random() * 15));
     
-    // 2. Actualizamos los valores de la gráfica con nuevos números aleatorios
     this.monthlyStats.update(currentStats => 
       currentStats.map(stat => ({
         ...stat,
-        value: Math.floor(Math.random() * 85) + 10 // Genera valores entre 10 y 95
+        value: Math.floor(Math.random() * 85) + 10 
       }))
     );
   }
 
   /**
    * resetMetrics
-   * Permite volver a los valores iniciales del Mock.
+   * Permite volver a los valores iniciales.
    */
   resetMetrics(): void {
     this.totalRecords.set(this.INITIAL_RECORDS);
     this.monthlyStats.set(this.INITIAL_STATS);
+  }
+
+  private normalizeMetricsResponse(response: unknown): AdrMetricsApiResponse {
+    if (this.isApiResponse(response)) {
+      return response;
+    }
+
+    if (Array.isArray(response) && response.every((item) => this.isMonthlyStat(item))) {
+      return {
+        totalRecords: this.INITIAL_RECORDS,
+        monthlyStats: response
+      };
+    }
+
+    return ADR_METRICS_MOCK_RESPONSE;
+  }
+
+  private isApiResponse(response: unknown): response is AdrMetricsApiResponse {
+    return (
+      typeof response === 'object' &&
+      response !== null &&
+      'totalRecords' in response &&
+      typeof (response as { totalRecords?: unknown }).totalRecords === 'number' &&
+      'monthlyStats' in response &&
+      Array.isArray((response as { monthlyStats?: unknown }).monthlyStats) &&
+      (response as { monthlyStats: unknown[] }).monthlyStats.every((item) => this.isMonthlyStat(item))
+    );
+  }
+
+  private isMonthlyStat(item: unknown): item is MonthlyStat {
+    return (
+      typeof item === 'object' &&
+      item !== null &&
+      'month' in item &&
+      typeof (item as { month?: unknown }).month === 'string' &&
+      'value' in item &&
+      typeof (item as { value?: unknown }).value === 'number'
+    );
   }
 }
  

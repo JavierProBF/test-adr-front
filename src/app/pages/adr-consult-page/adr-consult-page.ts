@@ -1,24 +1,22 @@
-import { Component, signal, computed } from '@angular/core';
-import { CardsSelection } from "../../components/cards-selection/cards-selection";
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CardAdr } from "../../components/card-adr/card-adr";
+import { AdrMetricsService } from '../../services/adr-metrics.service';
+import { AdrTable } from "../../components/adr-table/adr-table";
 
 @Component({
   selector: 'app-adr-consult-page',
-  imports: [CardsSelection, CardAdr],
+  imports: [CardAdr, AdrTable],
   templateUrl: './adr-consult-page.html',
   styleUrl: './adr-consult-page.css',
 })
-export class AdrConsultPage {
+export class AdrConsultPage implements OnInit {
+  private readonly adrMetricsService = inject(AdrMetricsService);
 
-  monthlyStats = signal([
-    { month: 'Ene', value: 30 },
-    { month: 'Feb', value: 55 },
-    { month: 'Mar', value: 42 },
-    { month: 'Abr', value: 85 },
-    { month: 'May', value: 60 },
-    { month: 'Jun', value: 95 },
-    { month: 'Jul', value: 75 }
-  ]);
+  monthlyStats = this.adrMetricsService.monthlyStats;
+
+  ngOnInit(): void {
+    this.adrMetricsService.getMetricsFromServer();
+  }
 
   // Cálculo derivado para el trazo de la línea (SVG Path)
   linePath = computed(() => {
@@ -40,12 +38,6 @@ export class AdrConsultPage {
 
   // Simulación de actualización de datos
   randomizeData() {
-
-    this.monthlyStats.update(stats => 
-      stats.map(s => ({
-        ...s,
-        value: Math.floor(Math.random() * 80) + 10
-      }))
-    );
+    this.adrMetricsService.refreshMetrics();
   }
 }

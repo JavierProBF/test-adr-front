@@ -1,0 +1,24 @@
+ body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fcfcfc;
+            background-image: radial-gradient(#bc002d08 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        .japan-dot { width: 10px; height: 10px; background-color: #bc002d; border-radius: 50%; box-shadow: 0 0 12px rgba(188, 0, 45, 0.4); }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bc002d; border-radius: 10px; }
+
+        /* Efectos de Elevación Pro */
+        .table-row-hover { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border-left: 3px solid transparent; }
+        .table-row-hover:hover { 
+            background-color: #ffffff; 
+            transform: scale(1.005) translateX(6px);
+            border-left: 3px solid #bc002d;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            z-index: 20;
+        }
+        
+        .kanban-card { transition: all 0.3s ease; border-top-width: 4px; }
+        .kanban-card:hover { transform: translateY(-6px); box-shadow: 0 15px 30px -10px rgba(0,0,0,0.12); }

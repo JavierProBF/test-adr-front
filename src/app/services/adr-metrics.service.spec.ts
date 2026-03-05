@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 import { AdrMetricsService } from './adr-metrics.service';
 
@@ -6,7 +7,9 @@ describe('AdrMetricsService', () => {
   let service: AdrMetricsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [provideHttpClient()]
+    });
     service = TestBed.inject(AdrMetricsService);
   });
 

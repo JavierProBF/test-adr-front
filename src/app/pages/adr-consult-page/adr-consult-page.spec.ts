@@ -2,22 +2,24 @@ import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdrConsultPage } from './adr-consult-page';
-import { AdrRecordsService } from '../../services/adr-records.service';
+import { AdrMetricsService } from '../../services/adr-metrics.service';
 
 describe('AdrConsultPage', () => {
   let component: AdrConsultPage;
   let fixture: ComponentFixture<AdrConsultPage>;
 
   beforeEach(async () => {
-    const adrRecordsServiceMock = {
+    const adrMetricsServiceMock = {
       totalRecords: signal(1250),
-      refreshTotalRecords: jasmine.createSpy('refreshTotalRecords')
+      monthlyStats: signal([{ month: 'Ene', value: 30 }]),
+      getMetricsFromServer: jasmine.createSpy('getMetricsFromServer'),
+      refreshMetrics: jasmine.createSpy('refreshMetrics')
     };
 
     await TestBed.configureTestingModule({
       imports: [AdrConsultPage],
       providers: [
-        { provide: AdrRecordsService, useValue: adrRecordsServiceMock }
+        { provide: AdrMetricsService, useValue: adrMetricsServiceMock }
       ]
     })
     .compileComponents();

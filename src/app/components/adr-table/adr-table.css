@@ -1,0 +1,16 @@
+body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fafafa;
+            background-image: radial-gradient(#ef444410 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .sun-gradient {
+            background: radial-gradient(circle at center, #bc002d 0%, #9b0025 100%);
+        }
+        .japan-border {
+            border-left: 4px solid #bc002d;
+        }
+        .transition-all { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #bc002d; }

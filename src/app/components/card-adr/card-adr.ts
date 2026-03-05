@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AdrRecordsService } from '../../services/adr-records.service';
+import { AdrMetricsService } from '../../services/adr-metrics.service';
 
 @Component({
   selector: 'app-card-adr',
@@ -8,11 +8,11 @@ import { AdrRecordsService } from '../../services/adr-records.service';
   styleUrl: './card-adr.css',
 })
 export class CardAdr implements OnInit {
-  private readonly adrRecordsService = inject(AdrRecordsService);
-  totalRecords = this.adrRecordsService.totalRecords;
+  private readonly adrMetricsService = inject(AdrMetricsService);
+  totalRecords = this.adrMetricsService.totalRecords;
 
   ngOnInit(): void {
-    this.adrRecordsService.refreshTotalRecords();
+    this.adrMetricsService.getMetricsFromServer();
   }
 
 }

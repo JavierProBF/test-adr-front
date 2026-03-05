@@ -1,0 +1,220 @@
+<style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fafafa;
+            background-image: radial-gradient(#bc002d10 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .japan-border { border-left: 4px solid #bc002d; }
+        .japan-dot { width: 12px; height: 12px; background-color: #bc002d; border-radius: 50%; }
+        
+        .custom-checkbox {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #e2e8f0;
+            background-color: #fff;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background-color: #bc002d;
+            border-color: #bc002d;
+        }
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+<body class="text-slate-800 antialiased pb-20">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- CABECERA DEL PROYECTO (ESTILO BITÁCORA) -->
+        <div class="max-w-6xl mx-auto mb-10">
+            <div class="bg-white border border-slate-200 shadow-sm p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full -mr-16 -mt-16 opacity-50"></div>
+                
+                <div class="relative z-10 flex items-center gap-6">
+                    <div class="japan-dot"></div>
+                    <div>
+                        <h1 class="text-4xl font-black text-slate-900 tracking-tighter uppercase italic text-shadow-sm">Bitácora de Proyecto</h1>
+                        <p class="text-sm text-slate-400 font-bold italic mt-1 tracking-tight">Disciplina y rigor en la ejecución técnica.</p>
+                    </div>
+                </div>
+
+                <!-- CONTENEDOR DE BOTONES EN CABECERA -->
+                <div class="relative z-10 flex flex-col gap-3 w-full md:w-auto">
+                    <button class="flex-1 md:flex-none px-8 py-4 bg-slate-900 text-white text-[10px] font-black uppercase tracking-widest hover:bg-[#bc002d] transition-all shadow-xl active:scale-95 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        NUEVO PROYECTO
+                    </button>
+                    <!-- BOTÓN ADICIONADO: CONSULTAR LAS BITÁCORAS -->
+                    <button class="flex-1 md:flex-none px-8 py-3 border-2 border-slate-900 text-slate-900 text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        CONSULTAR LAS BITÁCORAS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETALLES DEL SEGMENTO Y FECHA -->
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
+            <div class="lg:col-span-2 bg-white border border-slate-200 p-8 shadow-sm">
+                <p class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-2">Nombre del Proyecto</p>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Arquitectura Kaisen</h2>
+                <div class="h-1 w-12 bg-[#bc002d] mt-4"></div>
+            </div>
+            <div class="bg-white border border-slate-200 p-8 shadow-sm">
+                <p class="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-2">Segmento / Grado</p>
+                <h2 class="text-xl font-bold text-[#bc002d] tracking-tight">Optimización Cloud</h2>
+            </div>
+            <div class="bg-white border border-slate-200 p-8 shadow-sm">
+                <p class="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] mb-2">Fecha de Inicio</p>
+                <h2 class="text-xl font-bold text-slate-800 tracking-tight italic">01 ENE, 2024</h2>
+            </div>
+        </div>
+
+        <!-- ANÁLISIS DE ALTERNATIVAS -->
+        <div class="max-w-6xl mx-auto space-y-16">
+            
+            <div class="flex items-center gap-4 mb-4">
+                <span class="w-8 h-px bg-slate-200"></span>
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-400">Análisis de Alternativas</h3>
+                <span class="flex-1 h-px bg-slate-200"></span>
+            </div>
+
+            <!-- ALTERNATIVA 1 -->
+            <section class="space-y-6">
+                <div class="flex justify-between items-center bg-slate-900 px-8 py-4">
+                    <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 italic">Alternativa 01 — Protocolo Ronin</h4>
+                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[9px] font-black uppercase tracking-widest border border-emerald-500/20">Finalizado</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Detalle Técnico -->
+                    <div class="bg-white border border-slate-100 p-8 shadow-sm lg:col-span-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-slate-900 tracking-widest italic border-b border-slate-100 pb-2 block mb-4">Ventajas (Pros)</label>
+                                <p class="text-sm text-slate-600 leading-relaxed">• Alta redundancia geográfica.<br>• Reducción de latencia en un 40%.<br>• Escalado autónomo basado en demanda.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-red-600 tracking-widest italic border-b border-slate-100 pb-2 block mb-4">Desventajas (Contras)</label>
+                                <p class="text-sm text-slate-600 leading-relaxed">• Curva de aprendizaje técnica elevada.<br>• Costo inicial de implementación incrementado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Impacto en Calidad -->
+                    <div class="bg-white border-l-4 border-l-blue-600 border border-slate-100 p-8 shadow-sm">
+                        <label class="text-[10px] font-black uppercase text-slate-900 tracking-[0.2em] block mb-6 italic">Impacto en Calidad</label>
+                        <div class="space-y-4">
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" checked disabled>
+                                    <span class="text-[10px] font-bold text-slate-600 uppercase">Rendimiento</span>
+                                </div>
+                                <span class="text-[10px] font-black text-blue-600">95%</span>
+                            </label>
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" checked disabled>
+                                    <span class="text-[10px] font-bold text-slate-600 uppercase">Seguridad</span>
+                                </div>
+                                <span class="text-[10px] font-black text-blue-600">88%</span>
+                            </label>
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" disabled>
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">Usabilidad</span>
+                                </div>
+                                <span class="text-[10px] font-black text-slate-300">--</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ALTERNATIVA 2 -->
+            <section class="space-y-6">
+                <div class="flex justify-between items-center bg-slate-100 px-8 py-4 border border-slate-200">
+                    <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 italic">Alternativa 02 — Esfera Bushidō</h4>
+                    <span class="px-3 py-1 bg-amber-500/10 text-amber-500 text-[9px] font-black uppercase tracking-widest border border-amber-500/20">En Revisión</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Detalle Técnico -->
+                    <div class="bg-white border border-slate-100 p-8 shadow-sm lg:col-span-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-slate-900 tracking-widest italic border-b border-slate-100 pb-2 block mb-4">Ventajas (Pros)</label>
+                                <p class="text-sm text-slate-600 leading-relaxed">• Simplicidad en la mantenibilidad.<br>• Integración nativa con servicios legacy.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase text-red-600 tracking-widest italic border-b border-slate-100 pb-2 block mb-4">Desventajas (Contras)</label>
+                                <p class="text-sm text-slate-600 leading-relaxed">• Capacidad de escalabilidad limitada.<br>• Mayor riesgo de deuda técnica a largo plazo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Impacto en Calidad -->
+                    <div class="bg-white border-l-4 border-l-amber-500 border border-slate-100 p-8 shadow-sm">
+                        <label class="text-[10px] font-black uppercase text-slate-900 tracking-[0.2em] block mb-6 italic">Impacto en Calidad</label>
+                        <div class="space-y-4">
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" checked disabled>
+                                    <span class="text-[10px] font-bold text-slate-600 uppercase">Mantenibilidad</span>
+                                </div>
+                                <span class="text-[10px] font-black text-amber-600">92%</span>
+                            </label>
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" checked disabled>
+                                    <span class="text-[10px] font-bold text-slate-600 uppercase">Fiabilidad</span>
+                                </div>
+                                <span class="text-[10px] font-black text-amber-600">75%</span>
+                            </label>
+                            <label class="flex items-center justify-between group">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="custom-checkbox" disabled>
+                                    <span class="text-[10px] font-bold text-slate-400 uppercase">Rendimiento</span>
+                                </div>
+                                <span class="text-[10px] font-black text-slate-300">--</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ACCIONES DE GESTIÓN -->
+        <div class="max-w-6xl mx-auto mt-16 flex justify-end gap-6">
+            <button class="px-10 py-5 border-2 border-slate-200 text-slate-400 font-black text-[10px] uppercase tracking-[0.4em] hover:bg-slate-50 transition-all active:scale-95">
+                Volver a Bitácora
+            </button>
+            <button class="px-12 py-5 bg-[#1a1a1a] text-white font-black text-[10px] uppercase tracking-[0.4em] hover:bg-[#bc002d] transition-all shadow-2xl active:scale-95">
+                Modificar Senda
+            </button>
+        </div>
+
+        <!-- DECORACIÓN ZEN FINAL -->
+        <div class="mt-20 flex justify-center items-center gap-4 opacity-20">
+            <div class="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+            <div class="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+            <div class="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
+        </div>
+    </div>
+
+</body>

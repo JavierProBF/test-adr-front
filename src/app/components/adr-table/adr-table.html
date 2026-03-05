@@ -1,0 +1,199 @@
+<body class="p-4 md:p-10 lg:p-16">
+
+    <div class="max-w-7xl mx-auto space-y-12">
+        
+        <!-- GRID PRINCIPAL DE PROYECTOS -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- COLUMNA IZQUIERDA: LISTADO DE PROYECTOS -->
+            <div class="flex-1 space-y-6">
+                <div class="bg-white rounded-none shadow-sm border-t-8 border-t-[#bc002d] border border-slate-200 overflow-hidden relative">
+                    <!-- Marca de agua sutil (Círculo) -->
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-red-50 rounded-full opacity-50 pointer-events-none"></div>
+
+                    <!-- Encabezado de la Sección -->
+                    <div class="p-8 md:p-10 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-6 relative z-10">
+                        <div>
+                            <h3 class="text-3xl font-black text-slate-900 tracking-tighter flex items-center gap-2">
+                                <span class="text-[#bc002d]">●</span> Bitácora de Proyectos
+                            </h3>
+                            <p class="text-slate-500 text-sm font-medium mt-1 tracking-tight italic">Disciplina y rigor en la ejecución técnica.</p>
+                        </div>
+                        
+                        <button [routerLink]="['/register']" class="flex items-center gap-3 px-8 py-4 bg-[#1a1a1a] text-white rounded-none font-bold text-[10px] uppercase tracking-[0.2em] hover:bg-[#bc002d] transition-all shadow-xl active:scale-95 whitespace-nowrap">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
+                            Nuevo Proyecto
+                        </button>
+                    </div>
+
+                    <!-- Tabla de Proyectos -->
+                    <div class="overflow-x-auto relative z-10">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50/80 text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">
+                                    <th class="px-8 py-6">Grado / Proyecto</th>
+                                    <th class="px-8 py-6 text-center">Grado de Honor</th>
+                                    <th class="px-8 py-6 text-center">Avance</th>
+                                    <th class="px-8 py-6 text-right">Gestión</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <!-- Proyecto 1 -->
+                                <tr class="group hover:bg-red-50/30 transition-colors">
+                                    <td class="px-8 py-6 japan-border">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 bg-[#1a1a1a] text-white flex items-center justify-center font-black text-xs group-hover:bg-[#bc002d] transition-all">壱</div>
+                                            <div>
+                                                <span class="font-bold text-slate-900 block text-base tracking-tight">Arquitectura Kaisen</span>
+                                                <span class="text-[9px] text-red-600 font-black uppercase tracking-widest">Optimización Cloud</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-center">
+                                        <span class="px-4 py-1.5 bg-emerald-50 text-emerald-800 rounded-none text-[9px] font-black uppercase tracking-widest border border-emerald-200">Finalizado</span>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <div class="flex flex-col items-center gap-1">
+                                            <div class="w-24 h-1 bg-slate-100 rounded-none overflow-hidden">
+                                                <div class="bg-[#d4af37] h-full" style="width: 100%"></div>
+                                            </div>
+                                            <span class="text-[9px] font-bold text-slate-400">100%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-right">
+                                        <button [routerLink]="['/adrdetails']" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-900 rounded-none text-[9px] font-black uppercase tracking-widest hover:bg-[#1a1a1a] hover:text-white transition-all">
+                                            Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- Proyecto 2 -->
+                                <tr class="group hover:bg-red-50/30 transition-colors">
+                                    <td class="px-8 py-6 japan-border">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 bg-[#1a1a1a] text-white flex items-center justify-center font-black text-xs group-hover:bg-[#bc002d] transition-all">弐</div>
+                                            <div>
+                                                <span class="font-bold text-slate-900 block text-base tracking-tight">Protocolo Ronin</span>
+                                                <span class="text-[9px] text-red-600 font-black uppercase tracking-widest">Seguridad Autónoma</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-center">
+                                        <span class="px-4 py-1.5 bg-blue-50 text-blue-800 rounded-none text-[9px] font-black uppercase tracking-widest border border-blue-200">En Curso</span>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <div class="flex flex-col items-center gap-1">
+                                            <div class="w-24 h-1 bg-slate-100 rounded-none overflow-hidden">
+                                                <div class="bg-[#bc002d] h-full" style="width: 65%"></div>
+                                            </div>
+                                            <span class="text-[9px] font-bold text-slate-400">65%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-right">
+                                        <button class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-900 rounded-none text-[9px] font-black uppercase tracking-widest hover:bg-[#1a1a1a] hover:text-white transition-all">
+                                            Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- Proyecto 3 -->
+                                <tr class="group hover:bg-red-50/30 transition-colors">
+                                    <td class="px-8 py-6 japan-border">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 bg-[#1a1a1a] text-white flex items-center justify-center font-black text-xs group-hover:bg-[#bc002d] transition-all">参</div>
+                                            <div>
+                                                <span class="font-bold text-slate-900 block text-base tracking-tight">Esfera Bushidō</span>
+                                                <span class="text-[9px] text-red-600 font-black uppercase tracking-widest">IA Predictiva</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-center">
+                                        <span class="px-4 py-1.5 bg-amber-50 text-amber-800 rounded-none text-[9px] font-black uppercase tracking-widest border border-amber-200">Revisión</span>
+                                    </td>
+                                    <td class="px-8 py-6">
+                                        <div class="flex flex-col items-center gap-1">
+                                            <div class="w-24 h-1 bg-slate-100 rounded-none overflow-hidden">
+                                                <div class="bg-slate-400 h-full" style="width: 15%"></div>
+                                            </div>
+                                            <span class="text-[9px] font-bold text-slate-400">15%</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 text-right">
+                                        <button class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-900 rounded-none text-[9px] font-black uppercase tracking-widest hover:bg-[#1a1a1a] hover:text-white transition-all">
+                                            Modificar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: ATRIBUTOS DEL PROYECTO -->
+            <aside class="w-full lg:w-80 space-y-6">
+                <div class="bg-white p-8 rounded-none border-t-8 border-t-[#1a1a1a] border border-slate-200 shadow-sm relative overflow-hidden">
+                    <h4 class="text-lg font-black text-slate-900 tracking-tighter mb-8 border-b border-slate-100 pb-4 uppercase">Balance de Proyecto</h4>
+
+                    <div class="space-y-8">
+                        <!-- Calidad -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-end">
+                                <span class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Calidad del Código</span>
+                                <span class="text-xs font-bold text-[#bc002d]">98%</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-50 rounded-none overflow-hidden">
+                                <div class="h-full bg-[#bc002d] transition-all duration-1000" style="width: 98%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tiempo -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-end">
+                                <span class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Cumplimiento Plazos</span>
+                                <span class="text-xs font-bold text-[#d4af37]">82%</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-50 rounded-none overflow-hidden">
+                                <div class="h-full bg-[#d4af37] transition-all duration-1000" style="width: 82%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Sinergia -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-end">
+                                <span class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Sinergia de Equipo</span>
+                                <span class="text-xs font-bold text-slate-800">90%</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-50 rounded-none overflow-hidden">
+                                <div class="h-full bg-slate-800 transition-all duration-1000" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Presupuesto -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-end">
+                                <span class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Control Presupuestario</span>
+                                <span class="text-xs font-bold text-slate-400">75%</span>
+                            </div>
+                            <div class="h-1 w-full bg-slate-50 rounded-none overflow-hidden">
+                                <div class="h-full bg-slate-300 transition-all duration-1000" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 pt-6 border-t border-slate-100 flex justify-center">
+                        <p class="text-[9px] font-bold text-slate-400 text-center uppercase tracking-widest">Reporte de Eficiencia Semanal</p>
+                    </div>
+                </div>
+
+                <!-- Card de Inspiración (Bushidō Data) -->
+                <div class="bg-[#1a1a1a] p-10 rounded-none text-white relative">
+                    <div class="absolute top-4 right-4 text-[#bc002d] text-2xl font-black">●</div>
+                    <h5 class="font-black text-xl mb-4 tracking-tighter italic">Filosofía de Gestión</h5>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-6 font-medium">Cada proyecto es un camino hacia la excelencia. La precisión en los datos es el reflejo de la maestría en la ejecución.</p>
+                    <button class="text-[10px] font-black uppercase tracking-[0.3em] text-[#bc002d] hover:text-white transition-all underline decoration-2 underline-offset-4">Reporte Estratégico</button>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+
+</body>
