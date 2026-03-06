@@ -1,0 +1,230 @@
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <div class="min-h-screen bg-[#fcfcfc] text-slate-800 font-['Plus_Jakarta_Sans'] pb-20 antialiased overflow-x-hidden">
+      
+      <!-- HEADER ELITE -->
+      <header class="bg-slate-900 text-white p-12 mb-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#bc002d]/10 rounded-full -mr-32 -mt-32 blur-[120px]"></div>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center relative z-10">
+          <div class="flex items-center gap-8 animate-reveal">
+            <div class="w-3 h-3 bg-[#bc002d] rounded-full shadow-[0_0_20px_#bc002d] animate-pulse"></div>
+            <div>
+                <h1 class="text-5xl font-black tracking-tighter uppercase italic text-shadow-sm">Senda Intelligence</h1>
+                <p class="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mt-2">Centro de Analítica Avanzada v4.2</p>
+            </div>
+          </div>
+          <div class="mt-8 md:mt-0 animate-reveal" style="animation-delay: 0.2s">
+            <button class="px-10 py-4 bg-[#bc002d] text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-[#bc002d] transition-all shadow-xl active:scale-95">Sincronizar Inteligencia</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <!-- KPI GRID CON ANIMACIONES Y DESCRIPCIONES DE CÁLCULO -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          
+          <!-- Card: Proyectos Totales -->
+          <div class="metric-card bg-white border border-slate-200 p-8 shadow-sm border-b-4 border-b-slate-900 animate-fade-up group relative overflow-hidden" style="animation-delay: 0.1s">
+            <div class="relative z-10">
+                <p class="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-4 italic">Total Iniciativas</p>
+                <div class="flex items-baseline gap-2">
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter italic">{{ totalProyectos() }}</h2>
+                    <span class="text-[10px] font-bold text-emerald-600 italic">↑ 14%</span>
+                </div>
+                
+                <!-- Info Panel (Hover) -->
+                <div class="mt-6 pt-6 border-t border-slate-50 space-y-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 h-0 group-hover:h-auto overflow-hidden">
+                    <div class="bg-slate-50 p-3 border-l-2 border-slate-900">
+                        <p class="text-[9px] font-black text-slate-900 uppercase mb-1 italic">Definición:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">Volumen acumulado de arquitecturas registradas.</p>
+                    </div>
+                    <div class="bg-slate-50 p-3 border-l-2 border-slate-400">
+                        <p class="text-[9px] font-black text-slate-900 uppercase mb-1 italic">Cálculo:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">Σ (ID únicos) donde estado ≠ 'Borrador'.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+          </div>
+
+          <!-- Card: Senda Activa -->
+          <div class="metric-card bg-white border border-slate-200 p-8 shadow-sm border-b-4 border-b-blue-600 animate-fade-up group relative overflow-hidden" style="animation-delay: 0.2s">
+            <div class="relative z-10">
+                <p class="text-[10px] font-black uppercase text-blue-600 tracking-widest mb-4 italic">Senda Activa</p>
+                <div class="flex items-baseline gap-2">
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter italic">{{ activos() }}</h2>
+                    <span class="text-[10px] font-bold text-blue-400 italic">72% Cap.</span>
+                </div>
+
+                <!-- Info Panel (Hover) -->
+                <div class="mt-6 pt-6 border-t border-slate-50 space-y-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 h-0 group-hover:h-auto overflow-hidden">
+                    <div class="bg-blue-50/50 p-3 border-l-2 border-blue-600">
+                        <p class="text-[9px] font-black text-blue-900 uppercase mb-1 italic">Definición:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">Flujo de trabajo en curso bajo supervisión activa.</p>
+                    </div>
+                    <div class="bg-blue-50/50 p-3 border-l-2 border-blue-200">
+                        <p class="text-[9px] font-black text-blue-900 uppercase mb-1 italic">Cálculo:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">N (En Ejecución) + N (En Revisión).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-700 text-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Card: Desviación -->
+          <div class="metric-card bg-white border border-slate-200 p-8 shadow-sm border-b-4 border-b-[#bc002d] animate-fade-up group relative overflow-hidden" style="animation-delay: 0.3s">
+            <div class="relative z-10">
+                <p class="text-[10px] font-black uppercase text-[#bc002d] tracking-widest mb-4 italic">Desviación Senda</p>
+                <div class="flex items-baseline gap-2">
+                    <h2 class="text-5xl font-black text-slate-900 tracking-tighter italic">{{ desviacion() }}%</h2>
+                    <span class="text-[10px] font-bold text-[#bc002d] italic">SLA Impact</span>
+                </div>
+
+                <!-- Info Panel (Hover) -->
+                <div class="mt-6 pt-6 border-t border-slate-50 space-y-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 h-0 group-hover:h-auto overflow-hidden">
+                    <div class="bg-red-50/50 p-3 border-l-2 border-[#bc002d]">
+                        <p class="text-[9px] font-black text-[#bc002d] uppercase mb-1 italic">Definición:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">Desfase temporal entre plan y realidad técnica.</p>
+                    </div>
+                    <div class="bg-red-50/50 p-3 border-l-2 border-red-200">
+                        <p class="text-[9px] font-black text-[#bc002d] uppercase mb-1 italic">Cálculo:</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed font-medium italic">((t_real - t_plan) / t_plan) * 100.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-[0.03] group-hover:opacity-[0.08] transition-all duration-700 text-[#bc002d]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Card: Gobierno -->
+          <div class="metric-card bg-slate-900 p-8 shadow-2xl border-b-4 border-b-emerald-500 text-white animate-fade-up group relative overflow-hidden" style="animation-delay: 0.4s">
+            <div class="relative z-10">
+                <p class="text-[10px] font-black uppercase text-slate-500 tracking-widest mb-4 italic">Gobierno Global</p>
+                <div class="flex items-baseline gap-2">
+                    <h2 class="text-5xl font-black tracking-tighter italic text-emerald-500">{{ gobierno() }}%</h2>
+                    <span class="text-[10px] font-bold text-emerald-400/50 italic">Audited</span>
+                </div>
+
+                <!-- Info Panel (Hover) -->
+                <div class="mt-6 pt-6 border-t border-slate-800 space-y-3 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 h-0 group-hover:h-auto overflow-hidden">
+                    <div class="bg-white/5 p-3 border-l-2 border-emerald-500">
+                        <p class="text-[9px] font-black text-emerald-500 uppercase mb-1 italic">Definición:</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed font-medium italic">Adherencia normativa a los estándares Nippon.</p>
+                    </div>
+                    <div class="bg-white/5 p-3 border-l-2 border-white/20">
+                        <p class="text-[9px] font-black text-emerald-500 uppercase mb-1 italic">Cálculo:</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed font-medium italic">Promedio de los 5 ejes de la matriz de honor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-[0.05] group-hover:opacity-[0.15] transition-all duration-700 text-emerald-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCIÓN DE ANALÍTICA AVANZADA (6 GRÁFICAS) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
+            
+            <!-- 1. Tendencia Temporal (Líneas) -->
+            <div class="bg-white border border-slate-200 p-10 shadow-sm animate-fade-up lg:col-span-2" style="animation-delay: 0.5s">
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-900 mb-10 italic">Flujo de Senda Mensual</h3>
+                <div class="h-80 relative">
+                  @if (!chartJsLoaded) { <div class="loading-overlay">Cargando Tendencias...</div> }
+                  <canvas #lineChart></canvas>
+                </div>
+            </div>
+
+            <!-- 2. Estado de Salud (Doughnut) -->
+            <div class="bg-white border border-slate-200 p-10 shadow-sm animate-fade-up" style="animation-delay: 0.6s">
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-900 mb-10 italic">Estado de la Flota</h3>
+                <div class="h-80 relative">
+                  @if (!chartJsLoaded) { <div class="loading-overlay">Analizando Salud...</div> }
+                  <canvas #doughnutChart></canvas>
+                </div>
+            </div>
+
+            <!-- 3. Dimensiones de Gobierno (Radar) -->
+            <div class="bg-slate-900 p-10 shadow-2xl animate-fade-up" style="animation-delay: 0.7s">
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-400 mb-10 italic">Auditoría de Honor (Radar)</h3>
+                <div class="h-80 relative">
+                  @if (!chartJsLoaded) { <div class="loading-overlay bg-slate-800">Cargando Radar...</div> }
+                  <canvas #radarChart></canvas>
+                </div>
+            </div>
+
+            <!-- 4. Riesgos por Categoría (Polar Area) -->
+            <div class="bg-white border border-slate-200 p-10 shadow-sm animate-fade-up" style="animation-delay: 0.8s">
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-900 mb-10 italic">Distribución de Riesgos</h3>
+                <div class="h-80 relative">
+                  @if (!chartJsLoaded) { <div class="loading-overlay">Mapeando Riesgos...</div> }
+                  <canvas #polarChart></canvas>
+                </div>
+            </div>
+
+            <!-- 5. Distribución por Segmento (Barras) -->
+            <div class="bg-white border border-slate-200 p-10 shadow-sm animate-fade-up" style="animation-delay: 0.9s">
+                <h3 class="text-xs font-black uppercase tracking-[0.4em] text-slate-900 mb-10 italic">Carga por Segmento</h3>
+                <div class="h-80 relative">
+                  <canvas #barChart></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TABLA DE AUDITORÍA FINAL -->
+        <div class="bg-white border border-slate-200 shadow-2xl overflow-hidden animate-fade-up" style="animation-delay: 1s">
+            <div class="p-10 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
+                <h3 class="text-sm font-black uppercase tracking-[0.4em] text-slate-900 italic">Auditoría de Desviación</h3>
+                <div class="flex gap-4">
+                  <span class="px-3 py-1 bg-red-50 text-[#bc002d] text-[9px] font-black uppercase animate-pulse">Alertas Críticas</span>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50/30 text-[10px] font-black uppercase text-slate-400 tracking-widest italic border-b border-slate-100">
+                        <tr>
+                            <th class="px-12 py-6">ID Senda</th>
+                            <th class="px-12 py-6">Iniciativa</th>
+                            <th class="px-12 py-6">Gobierno</th>
+                            <th class="px-12 py-6 text-center">Desviación</th>
+                            <th class="px-12 py-6 text-right">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        @for (p of proyectosDetalle(); track p.id) {
+                            <tr class="hover:bg-slate-50/80 transition-all group">
+                                <td class="px-12 py-8 text-[11px] font-black text-slate-300 italic group-hover:text-[#bc002d]">#{{ p.id }}</td>
+                                <td class="px-12 py-8 font-black text-slate-900 text-xs uppercase italic tracking-tighter">{{ p.nombre }}</td>
+                                <td class="px-12 py-8">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-24 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500 shadow-[0_0_8px_#10b981]" [style.width.%]="p.gobierno"></div>
+                                        </div>
+                                        <span class="text-[11px] font-black text-emerald-600 italic">{{ p.gobierno }}%</span>
+                                    </div>
+                                </td>
+                                <td class="px-12 py-8 text-center">
+                                    <span class="text-[11px] font-black px-4 py-2 bg-red-50 text-[#bc002d] border border-red-100 italic group-hover:bg-[#bc002d] group-hover:text-white transition-all">+{{ p.desviacion }}%</span>
+                                </td>
+                                <td class="px-12 py-8 text-right font-black text-[10px] uppercase text-slate-400 group-hover:text-slate-900 cursor-pointer italic tracking-widest">Intervenir Senda</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+      </main>
+
+      <footer class="mt-24 flex flex-col items-center gap-6 opacity-30 italic">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">Senda Nippon Ultra Intelligence • 2024</p>
+      </footer>
+
+    </div>

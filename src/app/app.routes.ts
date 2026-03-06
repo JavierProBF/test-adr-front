@@ -34,6 +34,10 @@ export const routes: Routes = [
         path: 'detailUser',
         loadComponent: () => import('./pages/detail-user-page/detail-user-page').then(m => m.DetailUserPage)
     },
+    {
+        path: 'report',
+        loadComponent: () => import('./pages/report-page/report-page').then(m => m.ReportPage)
+    },
     // Ruta comodín para páginas no encontradas
     { 
         path: '**',
