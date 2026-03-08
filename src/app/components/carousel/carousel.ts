@@ -17,27 +17,27 @@ export class Carousel {
   gallery = signal([
     { 
       id: 1, 
-      url: 'https://images.unsplash.com/photo-15420518418c7-d2a42d13b56b?auto=format&fit=crop&q=80&w=800', 
-      title: 'Kaisen Neural Core', 
-      description: 'Filosofía de optimización constante aplicada al procesamiento de flujos técnicos bajo el estándar de honor.' 
+      url: 'https://dev-strategy.com/wp-content/uploads/2024/01/services-dev-strategy.png', 
+      title: 'Arquitectura de Senda', 
+      description: 'La arquitectura de senda es la base para el diseño de sistemas resilientes y escalables.' 
     },
     { 
       id: 2, 
-      url: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=800', 
-      title: 'Repositorio Zen Pro', 
-      description: 'Arquitectura de almacenamiento sagrada para activos críticos de información con cifrado de grado imperial.' 
+      url: 'https://t4.ftcdn.net/jpg/04/73/84/61/360_F_473846184_0k637f6855ZJqaulKqAmgJTEVGVibR1P.jpg', 
+      title: 'Equipo Payment', 
+      description: 'El equipo Payment está compuesto por expertos en pagos digitales y seguridad financiera.' 
     },
     { 
       id: 3, 
-      url: 'https://images.unsplash.com/photo-1528164344705-47542687990d?auto=format&fit=crop&q=80&w=800', 
-      title: 'Vectores de Disciplina', 
-      description: 'Sincronización global mediante rutas de comunicación disciplinadas y balance de carga inteligente.' 
+      url: 'https://t4.ftcdn.net/jpg/03/86/04/93/360_F_386049395_X3LxuotZN5JD0PYFm53Q2tr8xqvat0lH.jpg', 
+      title: 'Equipo Credits', 
+      description: 'El equipo Credits está compuesto por expertos en gestión de créditos y análisis financiero.' 
     },
     { 
       id: 4, 
-      url: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=80&w=800', 
-      title: 'Interfaz Armónica v2', 
-      description: 'Puntos de contacto diseñados para la fluidez absoluta entre el gestor de senda y el núcleo del sistema.' 
+      url: 'https://cdn.corporatefinanceinstitute.com/assets/top-6-skills-in-finance-e1680549320407.jpeg', 
+      title: 'Equipo Finance', 
+      description: 'El equipo Finance está compuesto por expertos en análisis financiero y toma de decisiones estratégicas.' 
     }
   ]);
 
