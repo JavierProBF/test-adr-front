@@ -1,21 +1,21 @@
- <div class=" bg-[#fcf8f8] font-['Plus_Jakarta_Sans'] text-slate-800 antialiased flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden">
+ <div class="bg-[#fcf8f8] font-['Plus_Jakarta_Sans'] text-slate-800 antialiased flex flex-col items-center justify-center p-3 sm:p-6 md:p-12 overflow-hidden">
       
       <!-- DECORACIÓN MINIMALISTA -->
-      <div class="fixed inset-0 pointer-events-none flex items-center justify-center">
-        <div class=" h-[800px] border border-slate-100 rounded-full opacity-40"></div>
-        <div class="absolute top-20 right-20 w-32 h-32 bg-[#bc002d]/5 rounded-full blur-3xl"></div>
+      <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <div class="h-135 sm:h-200 border border-slate-100 rounded-full opacity-40"></div>
+        <div class="absolute top-10 right-8 sm:top-20 sm:right-20 w-20 h-20 sm:w-32 sm:h-32 bg-[#bc002d]/5 rounded-full blur-3xl"></div>
       </div>
 
       <!-- CONTENEDOR PRINCIPAL -->
       <div class="w-full max-w-6xl relative z-10 space-y-8">
         
         <!-- ENCABEZADO Y CONTROL DE VISIBILIDAD -->
-        <div class="flex flex-col md:flex-row justify-between items-end gap-6 animate-reveal">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 sm:gap-6 animate-reveal">
          
 
           <!-- BOTÓN DE VISIBILIDAD -->
           <button (click)="toggleVisibility()" 
-                  class="group/toggle flex items-center gap-4 px-6 py-3 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all active:scale-95">
+                  class="group/toggle flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-3 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all active:scale-95">
             <span class="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover/toggle:text-[#bc002d] transition-colors">
               {{ isVisible() ? 'Ocultar Galería' : 'Mostrar Galería' }}
             </span>
@@ -32,32 +32,32 @@
           <div class="relative group/carousel animate-in fade-in zoom-in duration-500">
             
             <!-- Botones de Navegación Lateral -->
-            <button (click)="scrollPrev()" class="nav-btn-zen left-[-1rem] md:left-[-4rem]">
+            <button (click)="scrollPrev()" class="nav-btn-zen hidden md:flex -left-4 md:-left-16">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             
-            <button (click)="scrollNext()" class="nav-btn-zen right-[-1rem] md:right-[-4rem]">
+            <button (click)="scrollNext()" class="nav-btn-zen hidden md:flex -right-4 md:-right-16">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
 
             <!-- Contenedor de Scroll -->
-            <div #carousel (scroll)="onScroll()" class="flex gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-8 px-4">
+            <div #carousel (scroll)="onScroll()" class="flex gap-4 sm:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar py-6 sm:py-8 px-2 sm:px-4">
               
               @for (item of gallery(); track item.id; let i = $index) {
-                <div class="min-w-[85vw] md:min-w-[440px] snap-center">
+                <div class="min-w-[88vw] sm:min-w-[70vw] md:min-w-110 snap-center">
                   <div class="nippon-card group/card">
-                    <div class="h-64 overflow-hidden bg-slate-50 relative">
+                    <div class="h-52 sm:h-64 overflow-hidden bg-slate-50 relative">
                       <img [src]="item.url" [alt]="item.title" 
-                           class="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-[1s] group-hover/card:scale-110">
+                           class="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-1000 group-hover/card:scale-110">
                       <div class="absolute top-6 left-6 bg-white/90 backdrop-blur border border-slate-100 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-slate-800">
                         Fase 0{{i + 1}}
                       </div>
                     </div>
 
-                    <div class="p-8 bg-white relative">
+                    <div class="p-5 sm:p-8 bg-white relative">
                       <div class="flex items-center gap-3 mb-4">
                           <div class="w-1 h-6 bg-[#bc002d]"></div>
-                          <h3 class="text-xl font-black text-slate-900 uppercase tracking-tighter italic">
+                          <h3 class="text-base sm:text-xl font-black text-slate-900 uppercase tracking-tighter italic">
                             {{item.title}}
                           </h3>
                       </div>

@@ -1,2 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}

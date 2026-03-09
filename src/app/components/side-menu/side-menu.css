@@ -56,6 +56,23 @@
 
 @media (max-width: 1024px) {
   :host {
-    width: 15.5rem;
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar-shell {
+    min-height: auto;
+    border-right: 0;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.2);
+  }
+
+  .sidebar-content {
+    margin-top: 0;
+  }
+
+  .sidebar-glow {
+    display: none;
   }
 }

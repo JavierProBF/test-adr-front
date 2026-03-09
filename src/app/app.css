@@ -1,0 +1,15 @@
+.main-content {
+	min-height: 100dvh;
+	width: 100%;
+	padding-inline: 0.75rem;
+	padding-top: 0.75rem;
+}
+
+@media (min-width: 1025px) {
+	.main-content {
+		margin-left: 17rem;
+		width: calc(100% - 17rem);
+		padding-inline: 1.5rem;
+		padding-top: 1rem;
+	}
+}
