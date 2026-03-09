@@ -1,0 +1,118 @@
+:host {
+	display: block;
+	padding: 0 1.25rem 1.1rem;
+}
+
+.sidebar-header {
+	display: grid;
+	gap: 1.1rem;
+}
+
+.logo-block {
+	padding: 0.75rem 0.75rem 0.25rem;
+}
+
+.kicker {
+	margin: 0;
+	color: #94a3b8;
+	font-size: 0.66rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.brand-row {
+	margin-top: 0.3rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.brand-title {
+	margin: 0;
+	color: #f8fafc;
+	font-size: 1.55rem;
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+	font-weight: 800;
+}
+
+.brand-title span {
+	color: #38bdf8;
+}
+
+.version-pill {
+	padding: 0.2rem 0.65rem;
+	border-radius: 999px;
+	color: #bfdbfe;
+	border: 1px solid rgba(59, 130, 246, 0.4);
+	background: rgba(30, 58, 138, 0.35);
+	font-size: 0.65rem;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.brand-description {
+	margin: 0.55rem 0 0;
+	font-size: 0.79rem;
+	color: #9ca3af;
+	line-height: 1.45;
+}
+
+.profile-card {
+	border-radius: 1rem;
+	border: 1px solid rgba(148, 163, 184, 0.25);
+	background: linear-gradient(160deg, rgba(30, 41, 59, 0.55), rgba(15, 23, 42, 0.18));
+	padding: 0.85rem;
+}
+
+.welcome {
+	margin: 0;
+	color: #94a3b8;
+	font-size: 0.73rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.profile-link {
+	margin-top: 0.6rem;
+	display: flex;
+	gap: 0.7rem;
+	align-items: center;
+	text-decoration: none;
+}
+
+.avatar-wrap {
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 999px;
+	padding: 2px;
+	background: linear-gradient(155deg, rgba(56, 189, 248, 0.9), rgba(188, 0, 45, 0.85));
+}
+
+.avatar {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: inherit;
+	border: 2px solid #0f172a;
+}
+
+.profile-copy {
+	display: grid;
+	gap: 0.05rem;
+}
+
+.profile-name {
+	color: #f8fafc;
+	font-size: 0.87rem;
+	font-weight: 700;
+}
+
+.profile-role {
+	color: #94a3b8;
+	font-size: 0.73rem;
+}

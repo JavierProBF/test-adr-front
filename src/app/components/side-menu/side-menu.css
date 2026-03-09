@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  width: 17rem;
+  height: 100dvh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+}
+
+.sidebar-shell {
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.2), transparent 42%),
+    radial-gradient(circle at 88% 92%, rgba(188, 0, 45, 0.25), transparent 40%),
+    linear-gradient(168deg, #020617 0%, #0f172a 48%, #111827 100%);
+  box-shadow: 20px 0 45px rgba(2, 6, 23, 0.35);
+}
+
+.sidebar-glow {
+  position: sticky;
+  top: 0;
+  height: 4.75rem;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0));
+}
+
+.sidebar-content {
+  position: relative;
+  z-index: 1;
+  margin-top: -4.75rem;
+  padding: 1rem 0 1.25rem;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+}
+
+@media (max-width: 1024px) {
+  :host {
+    width: 15.5rem;
+  }
+}

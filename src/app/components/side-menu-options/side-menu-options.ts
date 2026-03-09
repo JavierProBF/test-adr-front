@@ -18,8 +18,8 @@ interface MenuItem {
 })
 export class SideMenuOptions {
 SideMenuItems: MenuItem[] = [
-    { label: 'Home', route: '/home', icon: 'fa-solid fa-house-chimney-user fa-lg' },
-    { label: 'ADR', route: '/consult', icon: 'fa-solid fa-magnifying-glass' },
-    { label: 'Register', route: '/home/register', icon: 'fa-solid fa-file-pen' }
+    { label: 'Home', sublabel: 'Panel principal', route: '/home', icon: 'fa-solid fa-house-chimney-user fa-lg' },
+    { label: 'ADR', sublabel: 'Consulta y trazabilidad', route: '/consult', icon: 'fa-solid fa-magnifying-glass' },
+    { label: 'Register', sublabel: 'Nuevo registro ADR', route: '/home/register', icon: 'fa-solid fa-file-pen' }
   ];
 }
