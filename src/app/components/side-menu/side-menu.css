@@ -1,3 +1,4 @@
+/* ── Host layout ────────────────────────────────────────────── */
 :host {
   display: block;
   width: 17rem;
@@ -5,74 +6,204 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 30;
+  z-index: 40;
+  transition: width 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+:host.is-collapsed {
+  width: 4.5rem;
+}
+
+/* ── Sidebar shell ──────────────────────────────────────────── */
 .sidebar-shell {
   height: 100%;
   position: relative;
   overflow-y: auto;
-  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  overflow-x: hidden;
+  border-right: 1px solid rgba(148, 163, 184, 0.1);
   background:
-    radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.2), transparent 42%),
-    radial-gradient(circle at 88% 92%, rgba(188, 0, 45, 0.25), transparent 40%),
-    linear-gradient(168deg, #020617 0%, #0f172a 48%, #111827 100%);
-  box-shadow: 20px 0 45px rgba(2, 6, 23, 0.35);
+    radial-gradient(ellipse 65% 40% at 20% -5%, rgba(56, 189, 248, 0.12) 0%, transparent 100%),
+    radial-gradient(ellipse 55% 36% at 88% 108%, rgba(220, 38, 38, 0.14) 0%, transparent 100%),
+    linear-gradient(170deg, #060c1a 0%, #0c1527 52%, #09101e 100%);
+  box-shadow: 4px 0 40px rgba(0, 0, 0, 0.5), inset -1px 0 0 rgba(255, 255, 255, 0.04);
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── Sticky glow ────────────────────────────────────────────── */
 .sidebar-glow {
   position: sticky;
   top: 0;
-  height: 4.75rem;
+  height: 5rem;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0));
+  background: linear-gradient(180deg, rgba(6, 12, 26, 0.96) 0%, transparent 100%);
 }
 
+/* ── Content area ───────────────────────────────────────────── */
 .sidebar-content {
   position: relative;
   z-index: 1;
-  margin-top: -4.75rem;
-  padding: 1rem 0 1.25rem;
+  margin-top: -5rem;
+  padding: 1rem 0 1.5rem;
 }
 
+/* ── Desktop collapse button ────────────────────────────────── */
+.collapse-btn {
+  display: none;
+  position: absolute;
+  top: 1.4rem;
+  right: -0.9rem;
+  z-index: 50;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  background: #162033;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  color: #64748b;
+  cursor: pointer;
+  place-items: center;
+  font-size: 0.62rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.collapse-btn:hover {
+  background: #1e2f4a;
+  color: #e2e8f0;
+  transform: scale(1.1);
+}
+
+/* ── Mobile hamburger ───────────────────────────────────────── */
+.mobile-trigger {
+  display: none;
+  position: fixed;
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 45;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.65rem;
+  background: rgba(9, 16, 30, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  color: #e2e8f0;
+  cursor: pointer;
+  place-items: center;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  transition: background 200ms ease;
+}
+
+.mobile-trigger:hover {
+  background: rgba(18, 30, 55, 0.92);
+}
+
+/* ── Mobile close button ────────────────────────────────────── */
+.mobile-close-btn {
+  display: none;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  cursor: pointer;
+  place-items: center;
+  font-size: 0.9rem;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.mobile-close-btn:hover {
+  background: rgba(148, 163, 184, 0.18);
+  color: #f1f5f9;
+}
+
+/* ── Mobile backdrop overlay ────────────────────────────────── */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 39;
+  background: rgba(2, 6, 20, 0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: fadein 220ms ease;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.35) transparent;
+  scrollbar-color: rgba(148, 163, 184, 0.18) transparent;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(148, 163, 184, 0.35);
+  background: rgba(148, 163, 184, 0.18);
 }
 
-@media (max-width: 1024px) {
+/* ── Mobile breakpoint ──────────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Host sigue fijo para contener el sidebar, pero no bloquea
+     eventos táctiles cuando el panel está oculto */
   :host {
-    position: static;
-    width: 100%;
-    height: auto;
+    width: 17rem;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  :host.is-collapsed {
+    width: 17rem;
+  }
+
+  /* El trigger siempre debe recibir eventos */
+  .mobile-trigger {
+    pointer-events: auto;
+  }
+
+  /* Cuando está abierto: host completo es interactivo */
+  :host.mobile-open {
+    pointer-events: auto;
+    overflow: visible;
   }
 
   .sidebar-shell {
-    min-height: auto;
-    border-right: 0;
-    border-radius: 1rem;
-    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.2);
+    transform: translateX(-100%);
   }
 
-  .sidebar-content {
-    margin-top: 0;
+  :host.mobile-open .sidebar-shell {
+    transform: translateX(0);
   }
 
-  .sidebar-glow {
-    display: none;
+  .mobile-trigger,
+  .mobile-close-btn {
+    display: grid;
+  }
+}
+
+/* ── Desktop breakpoint ─────────────────────────────────────── */
+@media (min-width: 1024px) {
+  :host {
+    overflow: visible; /* permite que el botón collapse sobresalga */
+  }
+
+  .collapse-btn {
+    display: grid;
+  }
+
+  .mobile-trigger,
+  .mobile-close-btn {
+    display: none !important;
   }
 }

@@ -1,0 +1,151 @@
+@reference "../../../styles.css";
+
+.module-btn {
+   @apply flex items-center gap-2 px-4 py-2.5 text-[8px] font-black uppercase tracking-widest text-white/40 transition-all rounded-md flex-1 justify-center whitespace-nowrap;
+}
+
+.module-btn:active {
+   @apply scale-95;
+}
+
+.active-mod-reportes { @apply bg-indigo-600 text-white shadow-lg shadow-indigo-900/40; }
+.active-mod-operativa { @apply bg-slate-700 text-white shadow-lg shadow-black/20; }
+.active-mod-kanban { @apply bg-rose-600 text-white shadow-lg shadow-rose-900/40; }
+
+.kpi-mini-card {
+   @apply bg-white p-4 border-r border-slate-100 transition-all border-b-2 border-transparent;
+}
+
+.kpi-mini-card:last-child {
+   @apply border-r-0;
+}
+
+.kpi-mini-card:hover {
+   @apply shadow-lg border-slate-300;
+}
+
+.kpi-label { @apply text-[8px] font-black uppercase tracking-widest; }
+
+.selected-sidebar { @apply border-l-[6px] border-[#F43F5E] bg-slate-50 shadow-inner translate-x-1; }
+
+.btn-color-filter {
+   @apply p-1.5 border text-[7px] font-black uppercase tracking-tighter transition-all rounded-sm bg-white flex-1 justify-center whitespace-nowrap;
+}
+
+.btn-color-filter:active {
+   @apply scale-90;
+}
+
+.active-all { @apply bg-[#0F172A] border-[#0F172A] text-white shadow-lg shadow-black/10; }
+.active-alta { @apply bg-rose-500 border-rose-500 text-white shadow-lg shadow-rose-500/30; }
+.active-media { @apply bg-amber-500 border-amber-500 text-white shadow-lg shadow-amber-500/30; }
+.active-baja { @apply bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-500/30; }
+.active-prog-btn { @apply bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/30; }
+.active-done-btn { @apply bg-emerald-600 border-emerald-600 text-white shadow-lg shadow-emerald-500/30; }
+
+/* ESTILO DROPDOWNS FILTRO */
+.filter-select {
+   @apply w-full bg-white border border-slate-200 p-2.5 text-[10px] font-black uppercase outline-none rounded-sm shadow-sm cursor-pointer appearance-none;
+}
+
+.filter-select:focus {
+   @apply border-[#F43F5E];
+}
+
+.label-zen-premium { @apply text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] mb-1 block; }
+
+.input-zen-premium {
+   @apply w-full bg-white border-2 border-slate-100 p-4 outline-none transition-all rounded-sm;
+}
+
+.input-zen-premium:focus {
+   @apply border-[#F43F5E] ring-4 ring-rose-500/5;
+}
+
+.input-zen-premium::placeholder {
+   @apply text-slate-200;
+}
+
+.btn-priority-selector {
+   @apply flex flex-col items-center justify-center p-4 border-2 transition-all rounded-sm font-black text-[9px] uppercase tracking-widest;
+}
+
+.btn-priority-selector:active {
+   @apply scale-95;
+}
+
+.active-baja-reg { @apply bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-200; }
+.active-media-reg { @apply bg-amber-500 border-amber-500 text-white shadow-lg shadow-amber-200; }
+.active-alta-reg { @apply bg-rose-500 border-rose-500 text-white shadow-lg shadow-rose-200; }
+
+.status-pill-bitacora {
+   @apply px-3 py-1.5 border border-slate-200 text-[7px] font-black uppercase transition-all tracking-widest rounded-md bg-white/50 backdrop-blur-sm whitespace-nowrap;
+}
+
+.status-pill-bitacora:hover {
+   @apply bg-white;
+}
+
+.status-pill-bitacora:active {
+   @apply scale-95;
+}
+
+.active-pend { @apply border-[#F43F5E] text-white bg-[#F43F5E] shadow-lg ring-2 ring-red-100; }
+.active-prog { @apply border-blue-600 text-white bg-blue-600 shadow-lg ring-2 ring-blue-100; }
+.active-done { @apply border-emerald-600 text-white bg-emerald-600 shadow-lg ring-2 ring-emerald-100; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+   @apply bg-slate-200 rounded-full;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+   @apply bg-slate-300;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+.animate-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+@media (min-width: 48rem) {
+   .module-btn {
+      @apply gap-3 px-6 text-[10px] flex-none;
+   }
+
+   .kpi-mini-card {
+      @apply p-6;
+   }
+
+   .kpi-label {
+      @apply text-[9px];
+   }
+
+   .selected-sidebar {
+      @apply border-l-[10px];
+   }
+
+   .btn-color-filter {
+      @apply p-2 text-[8px] flex-none;
+   }
+
+   .btn-priority-selector {
+      @apply text-[10px];
+   }
+
+   .status-pill-bitacora {
+      @apply px-4 py-2 text-[8px];
+   }
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      transform: translateY(10px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}

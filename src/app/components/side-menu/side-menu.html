@@ -1,8 +1,33 @@
-<aside id="menu" class="sidebar-shell custom-scrollbar" aria-label="Sidebar principal">
-   <div class="sidebar-glow" aria-hidden="true"></div>
+<!-- Mobile hamburger trigger -->
+<button class="mobile-trigger" (click)="toggleMobile()" aria-label="Abrir menú principal">
+  <i class="fa-solid fa-bars"></i>
+</button>
 
-   <div class="sidebar-content">
-      <app-side-menu-bar></app-side-menu-bar>
-      <app-side-menu-options></app-side-menu-options>
-   </div>
+<!-- Mobile backdrop -->
+@if (mobileOpen()) {
+  <div class="mobile-overlay" (click)="toggleMobile()" aria-hidden="true"></div>
+}
+
+<aside class="sidebar-shell custom-scrollbar" aria-label="Sidebar principal">
+  <div class="sidebar-glow" aria-hidden="true"></div>
+
+  <!-- Desktop collapse / expand button -->
+  <button
+    class="collapse-btn"
+    (click)="toggleCollapse()"
+    [title]="collapsed() ? 'Expandir sidebar' : 'Colapsar sidebar'"
+    aria-label="Toggle sidebar"
+  >
+    <i class="fa-solid" [class.fa-chevron-left]="!collapsed()" [class.fa-chevron-right]="collapsed()"></i>
+  </button>
+
+  <!-- Mobile close button -->
+  <button class="mobile-close-btn" (click)="toggleMobile()" aria-label="Cerrar menú">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="sidebar-content">
+    <app-side-menu-bar [collapsed]="collapsed()"></app-side-menu-bar>
+    <app-side-menu-options [collapsed]="collapsed()"></app-side-menu-options>
+  </div>
 </aside>

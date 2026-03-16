@@ -1,0 +1,353 @@
+ <div class="min-h-screen bg-[#FDFDFC] flex flex-col text-[#1E293B] font-sans antialiased selection:bg-[#F43F5E] selection:text-white">
+      
+      <!-- CABECERA RESPONSIVA -->
+      <header class="bg-[#0F172A] text-white px-4 md:px-10 py-6 shadow-2xl relative overflow-hidden shrink-0 border-b border-white/5">
+        <div class="absolute top-0 right-0 w-1/4 h-full bg-[#F43F5E] opacity-5 transform skew-x-[-25deg] translate-x-20 hidden lg:block"></div>
+        
+        <div class="max-w-full mx-auto flex flex-col lg:flex-row justify-between items-center gap-6 relative z-10">
+          <div class="flex items-center gap-4 group cursor-default">
+            <div class="w-3 h-3 bg-[#F43F5E] rounded-full shadow-[0_0_20px_rgba(244,63,94,0.9)] animate-pulse group-hover:scale-150 transition-transform"></div>
+            <div>
+              <h1 class="text-xl md:text-2xl font-black tracking-tighter uppercase leading-none border-l-4 border-[#F43F5E] pl-4 md:pl-6">
+                Senda <span class="text-white/70 font-extralight italic">Analitycs</span>
+              </h1>
+              <p class="text-[7px] md:text-[8px] text-white/30 font-bold tracking-[0.4em] mt-2 uppercase ml-4 md:ml-6">Monitor de Honor Operativo</p>
+            </div>
+          </div>
+
+          <nav class="flex items-center gap-1 md:gap-2 p-1.5 bg-white/5 rounded-lg border border-white/10 shadow-inner w-full lg:w-auto overflow-x-auto no-scrollbar justify-center">
+            <button (click)="viewMode.set('reportes')" [class.active-mod-reportes]="viewMode() === 'reportes'" class="module-btn group">
+              <span class="relative z-10">Reportes</span>
+            </button>
+            <button (click)="viewMode.set('operativa')" [class.active-mod-operativa]="viewMode() === 'operativa'" class="module-btn group">
+              <span class="relative z-10">Bitácora</span>
+            </button>
+            <button (click)="viewMode.set('kanban')" [class.active-mod-kanban]="viewMode() === 'kanban'" class="module-btn group">
+              <span class="relative z-10">Kanban</span>
+            </button>
+          </nav>
+          
+          <button (click)="startRegistration()" class="bg-[#F43F5E] hover:bg-[#E11D48] text-white px-6 md:px-8 py-3.5 rounded-sm flex items-center gap-4 transition-all shadow-xl hover:-translate-y-0.5 active:scale-95 group w-full lg:w-auto justify-center">
+            <svg class="w-4 h-4 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-width="3"/></svg>
+            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em]">Nuevo Registro</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="flex-1 w-full overflow-hidden flex flex-col">
+        
+        <!-- VISTA DE REPORTES -->
+        @if (viewMode() === 'reportes') {
+          <div class="flex-1 p-4 md:p-8 overflow-y-auto animate-in fade-in slide-in-from-bottom-6 duration-700 bg-[#F8FAFC]">
+            <div class="max-w-[1600px] mx-auto space-y-6 md:space-y-8">
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                 <div class="kpi-mini-card">
+                    <p class="kpi-label text-slate-400">Total Senda</p>
+                    <h3 class="text-2xl md:text-4xl font-black text-[#0F172A] mt-2">{{ tasks().length }}</h3>
+                 </div>
+                 <div class="kpi-mini-card">
+                    <p class="kpi-label text-blue-500">En Proceso</p>
+                    <h3 class="text-2xl md:text-4xl font-black text-[#0F172A] mt-2">{{ countStatus('En Progreso') }}</h3>
+                 </div>
+                 <div class="kpi-mini-card">
+                    <p class="kpi-label text-emerald-500">Eficiencia</p>
+                    <h3 class="text-2xl md:text-4xl font-black text-[#0F172A] mt-2">{{ getEfficiency() }}%</h3>
+                 </div>
+                 <div class="kpi-mini-card border-r-0 lg:border-r">
+                    <p class="kpi-label text-rose-500">Críticos</p>
+                    <h3 class="text-2xl md:text-4xl font-black text-rose-500 mt-2">{{ countPriority('Alta') }}</h3>
+                 </div>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                <div class="bg-white p-6 md:p-8 border border-slate-200 shadow-sm rounded-sm">
+                   <h3 class="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-[#0F172A] mb-8">Tendencia Operativa</h3>
+                   <div class="h-64 md:h-80 relative">
+                      <canvas #trendChart></canvas>
+                   </div>
+                </div>
+                <div class="bg-white p-6 md:p-8 border border-slate-200 shadow-sm rounded-sm">
+                   <h3 class="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-[#0F172A] mb-8">Balance de Estados</h3>
+                   <div class="h-64 md:h-80 relative">
+                      <canvas #statusChart></canvas>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- VISTA OPERATIVA (BITÁCORA) -->
+        @if (viewMode() === 'operativa') {
+          <div class="flex-1 flex flex-col lg:flex-row gap-0 animate-in slide-in-from-right-4 duration-500 h-full overflow-hidden bg-slate-100">
+            <!-- LISTADO LATERAL -->
+            <div class="w-full lg:w-[450px] bg-white border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col shadow-xl shrink-0 z-10 h-[40vh] lg:h-full">
+              <div class="p-4 md:p-6 border-b border-slate-100 bg-slate-50/50 space-y-4">
+                <!-- Buscador -->
+                <div class="relative group">
+                  <input [formControl]="searchControl" type="text" placeholder="BUSCAR HITOS..." class="w-full bg-white border border-slate-200 p-3 pl-10 text-[10px] font-black uppercase outline-none focus:border-[#F43F5E] transition-all rounded-sm shadow-sm">
+                  <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="3"/></svg>
+                </div>
+                
+                <!-- Filtros mediante Dropdown (Solicitud del Usuario) -->
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="flex flex-col gap-1.5">
+                    <p class="text-[7px] font-black text-slate-400 uppercase tracking-widest">Prioridad</p>
+                    <div class="relative">
+                      <select (change)="filterPriority.set($any($event.target).value)" [value]="filterPriority()" class="filter-select">
+                        <option value="Todas">Todas</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Media">Media</option>
+                        <option value="Baja">Baja</option>
+                      </select>
+                      <svg class="w-3 h-3 absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2.5"/></svg>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <p class="text-[7px] font-black text-slate-400 uppercase tracking-widest">Estado</p>
+                    <div class="relative">
+                      <select (change)="filterStatus.set($any($event.target).value)" [value]="filterStatus()" class="filter-select">
+                        <option value="Todos">Todos</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En Progreso">En Progreso</option>
+                        <option value="Completada">Completada</option>
+                      </select>
+                      <svg class="w-3 h-3 absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2.5"/></svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-between items-center bg-[#0F172A] rounded-sm p-3 text-white">
+                   <div class="flex items-center gap-2">
+                      <div class="w-1.5 h-1.5 bg-[#F43F5E] rounded-full animate-pulse"></div>
+                      <span class="text-[9px] font-black uppercase tracking-tighter">Resultados: {{ filteredTasks().length }}</span>
+                   </div>
+                   <span class="text-[8px] font-bold text-white/40 uppercase">Total: {{ tasks().length }}</span>
+                </div>
+              </div>
+              
+              <div class="flex-1 overflow-y-auto custom-scrollbar">
+                @for (task of filteredTasks(); track task.id) {
+                  <div (click)="selectTask(task)" [class.selected-sidebar]="selectedTask()?.id === task.id" class="p-4 md:p-6 border-b border-slate-50 cursor-pointer hover:bg-slate-50 transition-all group relative">
+                    <div class="flex justify-between items-start mb-2 group-hover:translate-x-1 transition-transform">
+                      <div class="flex items-center gap-2">
+                        <div [class]="getPriorityDot(task.priority)" class="w-2.5 h-2.5 rounded-full shadow-sm ring-2 ring-white group-hover:scale-110 transition-transform"></div>
+                        <span class="text-[9px] font-black text-slate-300 uppercase tracking-widest">#{{ task.id }}</span>
+                      </div>
+                      <span [class]="getStatusClass(task.status)" class="text-[7px] font-black px-2 py-0.5 uppercase border-2 rounded-sm shadow-sm">{{ task.status }}</span>
+                    </div>
+                    <h4 class="text-[12px] md:text-[13px] font-black text-[#0F172A] leading-tight uppercase mb-2 tracking-tighter group-hover:text-[#F43F5E] transition-colors line-clamp-2">{{ task.title }}</h4>
+                    <div class="flex justify-between items-center text-[9px] font-bold text-slate-400 uppercase italic">
+                      <span class="truncate max-w-[120px]">{{ task.responsible }}</span>
+                      <span class="font-black shrink-0 ml-2">{{ task.dueDate | date:'dd MMM' }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- DETALLE / REGISTRO -->
+            <div class="flex-1 flex flex-col overflow-hidden p-4 md:p-8 lg:p-12 bg-[#F1F5F9] min-h-[60vh] lg:min-h-0">
+              
+              @if (isRegistering()) {
+                <!-- FORMULARIO DE REGISTRO -->
+                <div class="bg-white border border-slate-200 shadow-2xl animate-in slide-in-from-bottom-8 duration-500 h-fit max-w-4xl mx-auto w-full rounded-md overflow-hidden flex flex-col group/register">
+                  <div class="bg-[#0F172A] p-6 md:p-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b-8 border-[#F43F5E]">
+                    <div>
+                      <h2 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter leading-none mb-2">Nuevo Registro Senda</h2>
+                      <p class="text-[9px] md:text-[10px] text-white/40 font-bold uppercase tracking-[0.4em]">Iniciando bitácora de honor operativo</p>
+                    </div>
+                    <div class="bg-white/10 px-4 py-2 rounded text-white/60 font-mono text-xs hidden md:block border border-white/5">ID_AUTO: {{ tasks().length + 101 }}</div>
+                  </div>
+
+                  <form [formGroup]="registerForm" (ngSubmit)="createTask()" class="p-6 md:p-10 space-y-8">
+                    <div class="space-y-3 group">
+                      <label class="label-zen-premium group-focus-within:text-[#F43F5E] transition-colors">Denominación del Proyecto</label>
+                      <input formControlName="title" type="text" class="input-zen-premium text-lg font-black" placeholder="NOMBRE DEL PROYECTO...">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div class="space-y-3">
+                        <label class="label-zen-premium">Gestor Responsable</label>
+                        <div class="relative">
+                          <select formControlName="responsible" class="input-zen-premium font-bold uppercase appearance-none pr-10 cursor-pointer">
+                            <option value="" disabled selected>Seleccione Gestor</option>
+                            @for (manager of managers; track manager) {
+                              <option [value]="manager">{{ manager }}</option>
+                            }
+                          </select>
+                          <svg class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2.5"/></svg>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <label class="label-zen-premium">Fecha Senda (Deadline)</label>
+                        <input formControlName="dueDate" type="date" class="input-zen-premium font-bold">
+                      </div>
+                    </div>
+
+                    <div class="space-y-4">
+                      <label class="label-zen-premium">Prioridad Operativa Inicial</label>
+                      <div class="grid grid-cols-3 gap-3 md:gap-6">
+                        <button type="button" (click)="registerForm.patchValue({priority: 'Baja'})" [class.active-baja-reg]="registerForm.get('priority')?.value === 'Baja'" class="btn-priority-selector border-emerald-100 text-emerald-600 hover:bg-emerald-50">Baja</button>
+                        <button type="button" (click)="registerForm.patchValue({priority: 'Media'})" [class.active-media-reg]="registerForm.get('priority')?.value === 'Media'" class="btn-priority-selector border-amber-100 text-amber-600 hover:bg-amber-50">Media</button>
+                        <button type="button" (click)="registerForm.patchValue({priority: 'Alta'})" [class.active-alta-reg]="registerForm.get('priority')?.value === 'Alta'" class="btn-priority-selector border-rose-100 text-rose-600 hover:bg-rose-50">Alta</button>
+                      </div>
+                    </div>
+
+                    <div class="space-y-3">
+                       <label class="label-zen-premium">Narrativa Inicial / Alcance</label>
+                       <div class="relative border-2 border-slate-100 rounded group-focus-within:border-[#F43F5E] transition-all">
+                          <div class="absolute left-0 top-0 bottom-0 w-1 bg-slate-200 group-focus-within/register:bg-[#F43F5E]"></div>
+                          <textarea formControlName="description" rows="4" class="w-full p-4 pl-6 bg-slate-50/20 outline-none font-mono text-sm resize-none focus:bg-white" placeholder="Describa el objetivo principal de este hito..."></textarea>
+                       </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                      <button type="button" (click)="isRegistering.set(false)" class="px-10 py-4 border-2 border-slate-200 text-[10px] font-black uppercase tracking-widest transition-all hover:bg-slate-50 active:scale-95">Cancelar Registro</button>
+                      <button type="submit" [disabled]="registerForm.invalid" class="flex-1 bg-[#0F172A] text-white font-black text-[10px] uppercase py-4 shadow-2xl hover:bg-black hover:shadow-rose-500/10 hover:-translate-y-1 active:scale-95 transition-all">Confirmar Registro en Bitácora</button>
+                    </div>
+                  </form>
+                </div>
+              } @else {
+                <!-- EDICIÓN BITÁCORA -->
+                @if (selectedTask(); as task) {
+                  <div class="flex flex-col h-full bg-white shadow-2xl rounded-md border border-slate-200 relative overflow-hidden animate-in fade-in duration-300 group/notebook">
+                    
+                    <div class="bg-[#F8FAFC] p-4 md:p-8 border-b-2 border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shrink-0">
+                      <div class="flex items-center gap-4 md:gap-6 w-full">
+                        <div [class]="getPriorityBackground(task.priority)" class="w-12 h-12 md:w-16 md:h-16 border-2 border-white shadow-xl flex items-center justify-center rounded-sm transform lg:-rotate-2 lg:group-hover/notebook:rotate-0 transition-all duration-500 shrink-0">
+                            <svg class="w-6 h-6 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-width="2.5"/></svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center gap-3 mb-1">
+                             <p class="text-[8px] md:text-[10px] font-black text-[#F43F5E] uppercase tracking-[0.4em]">BITÁCORA OPERATIVA #{{ task.id }}</p>
+                             <span [class]="getPriorityBadge(task.priority)" class="text-[7px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm">{{ task.priority }}</span>
+                          </div>
+                          <input [formControl]="$any(taskForm.get('title'))" class="w-full bg-transparent text-lg md:text-3xl font-black text-[#0F172A] uppercase tracking-tighter leading-none outline-none border-b-2 border-transparent focus:border-[#F43F5E] hover:border-slate-200 transition-all truncate" placeholder="TÍTULO">
+                        </div>
+                      </div>
+                      <div class="flex gap-2 w-full sm:w-auto justify-end opacity-0 group-hover/notebook:opacity-100 transition-opacity">
+                        <button (click)="deleteTask(task.id)" class="p-3 text-slate-300 hover:text-red-500 transition-all hover:bg-red-50 rounded-full">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2"/></svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <form [formGroup]="taskForm" class="flex-1 flex flex-col bg-white overflow-hidden">
+                      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-b border-slate-100">
+                        <div class="p-4 md:p-6 border-b sm:border-r border-slate-100 group hover:bg-slate-50 transition-colors">
+                           <label class="text-[8px] font-black text-slate-400 uppercase tracking-widest block mb-2 italic">Responsable</label>
+                           <div class="relative">
+                             <select formControlName="responsible" class="w-full bg-transparent font-black text-sm md:text-lg outline-none text-[#0F172A] uppercase cursor-pointer appearance-none pr-6">
+                                @for (manager of managers; track manager) {
+                                  <option [value]="manager">{{ manager }}</option>
+                                }
+                             </select>
+                             <svg class="w-3 h-3 absolute right-0 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="3"/></svg>
+                           </div>
+                        </div>
+                        <div class="p-4 md:p-6 border-b lg:border-r border-slate-100 group hover:bg-slate-50 transition-colors">
+                           <label class="text-[8px] font-black text-slate-400 uppercase tracking-widest block mb-2 italic">Fecha Límite</label>
+                           <input formControlName="dueDate" type="date" class="w-full bg-transparent font-black text-sm md:text-lg outline-none text-[#0F172A] focus:text-[#F43F5E] transition-colors">
+                        </div>
+                        
+                        <div [class]="getPriorityBlockClass(taskForm.get('priority')?.value)" class="p-4 md:p-6 border-b sm:border-r border-slate-100 group transition-all duration-300 shadow-inner">
+                           <label class="text-[8px] font-black opacity-60 uppercase tracking-widest block mb-2 italic">Prioridad Senda</label>
+                           <div class="relative">
+                             <select formControlName="priority" class="w-full bg-transparent font-black text-sm md:text-lg outline-none uppercase cursor-pointer appearance-none pr-6">
+                                <option value="Baja">Baja</option>
+                                <option value="Media">Media</option>
+                                <option value="Alta">Alta</option>
+                             </select>
+                             <svg class="w-3 h-3 absolute right-0 top-1/2 -translate-y-1/2 opacity-40 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="3"/></svg>
+                           </div>
+                        </div>
+
+                        <div [class]="getStatusBlockClass(task.status)" class="p-4 md:p-6 flex flex-col justify-center gap-3 transition-all duration-300 shadow-inner border-b sm:border-b-0">
+                           <label class="text-[8px] font-black opacity-60 uppercase tracking-widest block italic text-center">Estado Operativo</label>
+                           <div class="flex gap-1.5 justify-center">
+                             <button type="button" (click)="updateStatus('Pendiente')" [class.active-pend]="task.status === 'Pendiente'" class="status-pill-bitacora hover:shadow-sm">PND</button>
+                             <button type="button" (click)="updateStatus('En Progreso')" [class.active-prog]="task.status === 'En Progreso'" class="status-pill-bitacora hover:shadow-sm">PRG</button>
+                             <button type="button" (click)="updateStatus('Completada')" [class.active-done]="task.status === 'Completada'" class="status-pill-bitacora hover:shadow-sm">FIN</button>
+                           </div>
+                        </div>
+                      </div>
+
+                      <div class="flex-1 relative flex flex-col bg-white">
+                        <div class="absolute left-0 top-0 bottom-0 w-8 md:w-12 border-r-2 border-slate-100 flex flex-col items-center py-8 gap-6 opacity-20 hidden sm:flex pointer-events-none">
+                           @for (i of [1,2,3,4,5,6,7,8]; track i) {
+                             <div class="w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-slate-400 group-focus-within/notebook:border-[#F43F5E] transition-colors"></div>
+                           }
+                        </div>
+                        <div class="flex-1 relative p-6 md:p-12 sm:pl-16 md:pl-24 overflow-hidden">
+                           <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(#0F172A 1.5px, transparent 1.5px); background-size: 30px 30px;"></div>
+                           <textarea formControlName="description" class="w-full h-full bg-transparent font-mono text-sm md:text-lg leading-[2.2rem] outline-none text-slate-800 resize-none z-10 relative scroll-smooth custom-scrollbar" placeholder="Inicie la narrativa técnica operativa..."></textarea>
+                        </div>
+
+                        <div class="p-4 md:p-6 bg-[#F8FAFC] border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0">
+                           <div class="flex gap-6 text-[8px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">
+                              <span class="flex items-center gap-2 group cursor-help"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"/></svg> {{ getWordCount() }} palabras</span>
+                              <span class="flex items-center gap-2 group cursor-help"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg> {{ getReadTime() }} min lectura</span>
+                           </div>
+                           <button (click)="saveChanges()" [disabled]="taskForm.invalid" class="w-full sm:w-auto bg-[#0F172A] text-white px-8 md:px-10 py-3.5 md:py-4 font-black text-[9px] md:text-[10px] uppercase tracking-[0.4em] shadow-xl hover:bg-black transition-all transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-30">
+                             Sincronizar Bitácora
+                           </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                } @else {
+                  <div class="h-full flex flex-col items-center justify-center text-slate-300 opacity-50 border-4 border-dashed border-slate-200 rounded-md bg-white/50 p-10 text-center">
+                    <p class="font-black text-sm uppercase tracking-[0.5em]">Seleccione un hito para iniciar bitácora</p>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+
+        <!-- KANBAN -->
+        @if (viewMode() === 'kanban') {
+          <div class="flex-1 p-4 md:p-10 overflow-hidden flex flex-col h-full bg-[#FDFDFC] animate-in slide-in-from-left-4 duration-500">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 md:mb-8 border-b-2 border-[#0F172A] pb-4 md:pb-6 gap-4 shrink-0">
+               <h3 class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-[#0F172A]">Flujo de Trabajo Maestro</h3>
+               <div class="flex items-center gap-3">
+                 <span class="text-[8px] font-black text-slate-400 uppercase">Gestor:</span>
+                 <select (change)="setResponsibleFilter($any($event.target).value)" class="bg-white border border-slate-200 px-3 py-1.5 text-[9px] font-bold uppercase rounded-md shadow-sm outline-none focus:border-[#F43F5E] transition-all">
+                   <option value="Todos">Todos</option>
+                   @for (m of uniqueResponsibles(); track m) {
+                     <option [value]="m">{{ m }}</option>
+                   }
+                 </select>
+               </div>
+            </div>
+
+            <div class="flex-1 flex gap-6 md:gap-8 overflow-x-auto pb-6 px-2 custom-scrollbar lg:grid lg:grid-cols-3">
+              @for (column of kanbanColumns; track column.status) {
+                <div class="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 bg-slate-50/80 p-4 md:p-5 border border-slate-200 flex flex-col overflow-hidden shadow-inner rounded-sm hover:bg-slate-100/50 transition-colors duration-700">
+                  <div class="flex justify-between items-center mb-4 px-2">
+                    <p class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#0F172A]">{{ column.label }}</p>
+                    <span class="text-[10px] font-black text-slate-300">{{ filterTasksByStatus(column.status).length }}</span>
+                  </div>
+                  <div class="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-1">
+                    @for (task of filterTasksByStatus(column.status); track task.id) {
+                      <div (click)="openFromKanban(task)" class="bg-white p-4 md:p-6 border border-slate-200 shadow-sm hover:border-[#F43F5E] hover:shadow-2xl hover:-translate-y-1 cursor-pointer transition-all group relative overflow-hidden rounded-sm">
+                        <div [class]="getPriorityDot(task.priority)" class="absolute top-0 right-0 w-10 h-1 group-hover:w-full transition-all duration-500"></div>
+                        <h4 class="text-[10px] md:text-[12px] font-black text-[#0F172A] mb-8 uppercase leading-tight group-hover:text-[#F43F5E] transition-colors break-words line-clamp-3">{{ task.title }}</h4>
+                        <div class="flex justify-between items-center pt-3 border-t border-slate-50">
+                          <span class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase tracking-tighter">{{ task.responsible }}</span>
+                          <div class="flex gap-1">
+                            <button (click)="$event.stopPropagation(); moveTask(task, 'prev')" [disabled]="task.status === 'Pendiente'" class="p-1 border border-slate-100 disabled:opacity-0 hover:bg-slate-50 rounded-sm"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-width="3"/></svg></button>
+                            <button (click)="$event.stopPropagation(); moveTask(task, 'next')" [disabled]="task.status === 'Completada'" class="p-1 border border-slate-100 disabled:opacity-0 hover:bg-slate-50 rounded-sm"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-width="3"/></svg></button>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </main>
+    </div>

@@ -1,33 +1,51 @@
 <section class="sidebar-header">
-    <div id="logo" class="logo-block">
-        <p class="kicker">Workspace</p>
+  <div class="logo-block">
+    @if (!collapsed()) {
+      <p class="kicker">Workspace</p>
+    }
 
-        <div class="brand-row">
-            <h1 class="brand-title">
-                Dash<span>8</span>.
-            </h1>
-            <span class="version-pill">ADR</span>
-        </div>
-
-        <p class="brand-description">Gestiona acciones, reportes y seguimiento en una sola vista.</p>
+    <div class="brand-row">
+      @if (!collapsed()) {
+        <h1 class="brand-title">Dash<span>8</span>.</h1>
+        <span class="version-pill">ADR</span>
+      } @else {
+        <h1 class="brand-title brand-mini"><span>8</span></h1>
+      }
     </div>
 
-    <div id="profile" class="profile-card">
-        <p class="welcome">Welcome back</p>
+    @if (!collapsed()) {
+      <p class="brand-description">Gestiona acciones, reportes y seguimiento en una sola vista.</p>
+    }
+  </div>
 
-        <a href="#" class="profile-link">
-            <span class="avatar-wrap">
-                <img
-                    class="avatar"
-                    src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80"
-                    alt="User avatar"
-                >
-            </span>
+  @if (!collapsed()) {
+    <div class="profile-card">
+      <p class="welcome">Welcome back</p>
 
-            <span class="profile-copy">
-                <span class="profile-name">Edward Tompson</span>
-                <span class="profile-role">Project lead</span>
-            </span>
-        </a>
+      <a href="#" class="profile-link">
+        <span class="avatar-wrap">
+          <img
+            class="avatar"
+            src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80"
+            alt="User avatar"
+          >
+        </span>
+
+        <span class="profile-copy">
+          <span class="profile-name">Edward Tompson</span>
+          <span class="profile-role">Project lead</span>
+        </span>
+      </a>
     </div>
+  } @else {
+    <div class="avatar-collapsed">
+      <span class="avatar-wrap">
+        <img
+          class="avatar"
+          src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=128&q=80"
+          alt="User avatar"
+        >
+      </span>
+    </div>
+  }
 </section>
